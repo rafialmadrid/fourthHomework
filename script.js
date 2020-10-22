@@ -1,6 +1,5 @@
 // Set the body to a variable
 var body = document.body;
-
 // Create start page
 var quizStartPage = document.createElement("div");
 var quizTitle = document.createElement("h1");
@@ -31,6 +30,19 @@ var q3a1 = document.createElement("li");
 var q3a2 = document.createElement("li");
 var q3a3 = document.createElement("li");
 var q3a4 = document.createElement("li");
+//Create form
+var resultsPage = document.createElement("div");
+var finishMessage = document.createElement("h1");
+var score = document.createElement("p");
+var label = document.createElement("label");
+var initial = document.createElement("input");
+var submitButton = document.createElement("button");
+//create highscores
+var highscoresPage = document.createElement("div");
+var highscores = document.createElement("h1");
+var listScores = document.createElement("ul");
+var goBackButton = document.createElement("button");
+var clearButton = document.createElement("button");
 
 
 // Set the text content for start page
@@ -55,6 +67,15 @@ q3a1.textContent = "A bag of lemons";
 q3a2.textContent = "A handful of roses";
 q3a3.textContent = "A lollipop";
 q3a4.textContent = "A box of chocolates";//answer
+// Set the text for the results page
+finishMessage.textContent = "Thanks for completing the quiz!"
+score.textContent = "Your score is: ";
+submitButton.textContent = "Submit";
+// Set the text content for highscore page
+highscores.textContent = "Highscores"
+label.textContent = "Enter initials: "
+goBackButton.textContent = "Go Back";
+clearButton.textContent = "Clear highscores";
 
 
 // Append start page
@@ -79,7 +100,7 @@ listAnswers2.appendChild(q2a1);
 listAnswers2.appendChild(q2a2);
 listAnswers2.appendChild(q2a3);
 listAnswers2.appendChild(q2a4);
-// Append second question
+// Append third question
 body.appendChild(thirdQuestion);
 thirdQuestion.appendChild(question3);
 thirdQuestion.appendChild(listAnswers3);
@@ -87,35 +108,200 @@ listAnswers3.appendChild(q3a1);
 listAnswers3.appendChild(q3a2);
 listAnswers3.appendChild(q3a3);
 listAnswers3.appendChild(q3a4);
+// Append results page
+body.appendChild(resultsPage);
+resultsPage.appendChild(finishMessage);
+resultsPage.appendChild(score);
+resultsPage.appendChild(label);
+resultsPage.appendChild(initial);
+resultsPage.appendChild(submitButton);
+// Append highscores
+body.appendChild(highscoresPage);
+highscoresPage.appendChild(highscores);
+highscoresPage.appendChild(listScores);
+highscoresPage.appendChild(goBackButton);
+highscoresPage.appendChild(clearButton);
 
 
 // Style start page
-// quizStartPage.setAttribute("style", "display: none");
 quizTitle.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
 quizExplanation.setAttribute("style", "margin:auto; width:50%; text-align:center;");
 buttonDiv.setAttribute("style", "display: flex ; justify-content: center ; margin: 10px");
 startButton.setAttribute("style", "margin: auto ; center; text-align:center;");
+startButton.setAttribute("id", "startQuiz");
 // Style fisrt question
-// firstQuestion.setAttribute("style", "display: none");
 question1.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
-listAnswers1.setAttribute("style", "background:#80ced6; padding:20px; margin:auto; width:50%; text-align:center;");
+question1.setAttribute("id", "firstQ");
+listAnswers1.setAttribute("style", "background:#333333; padding:20px; margin:auto; width:50%; text-align:center;");
 q1a1.setAttribute("style", " color:white; background: #666666; padding: 5px; margin-left: 35px;");
 q1a2.setAttribute("style", " color:white; background: #777777; padding: 5px; margin-left: 35px;");
 q1a3.setAttribute("style", " color:white; background: #888888; padding: 5px; margin-left: 35px;");
 q1a4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");
 // Style second question
-// secondQuestion.setAttribute("style", "display: none");
 question2.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
-listAnswers2.setAttribute("style", "background:#80ced6; padding:20px; margin:auto; width:50%; text-align:center;");
+listAnswers2.setAttribute("style", "background:#333333; padding:20px; margin:auto; width:50%; text-align:center;");
 q2a1.setAttribute("style", " color:white; background: #666666; padding: 5px; margin-left: 35px;");
 q2a2.setAttribute("style", " color:white; background: #777777; padding: 5px; margin-left: 35px;");
 q2a3.setAttribute("style", " color:white; background: #888888; padding: 5px; margin-left: 35px;");
 q2a4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");
 // Style third question
-// thirdQuestion.setAttribute("style", "display: none");
 question3.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
-listAnswers3.setAttribute("style", "background:#80ced6; padding:20px; margin:auto; width:50%; text-align:center;");
+listAnswers3.setAttribute("style", "background:#333333; padding:20px; margin:auto; width:50%; text-align:center;");
 q3a1.setAttribute("style", " color:white; background: #666666; padding: 5px; margin-left: 35px;");
 q3a2.setAttribute("style", " color:white; background: #777777; padding: 5px; margin-left: 35px;");
 q3a3.setAttribute("style", " color:white; background: #888888; padding: 5px; margin-left: 35px;");
 q3a4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");
+// Style results page
+resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+// Style highscores page
+highscoresPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+goBackButton.setAttribute("style", "margin:10px ");
+
+
+
+// // Display turn on and off
+// quizStartPage.setAttribute("style", "display: none");
+
+secondQuestion.setAttribute("style", "display: none");
+firstQuestion.setAttribute("style", "display: none");
+thirdQuestion.setAttribute("style", "display: none");
+resultsPage.setAttribute("style", "display: none");
+highscoresPage.setAttribute("style", "display: none");
+
+//timer function
+var time = document.getElementById("Time");
+console.log(time);
+var secondsLeft = 60;
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      time.textContent = "Time: " + secondsLeft;
+  
+      if(secondsLeft <= 0) {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+  }
+
+//begins quiz by pushing button
+  startQuiz.addEventListener("click", function(event) {
+      setTime();
+      quizStartPage.setAttribute("style", "display: none");
+      firstQuestion.setAttribute("style", "display: inline");
+  })
+      //first question
+      firstQuestion.addEventListener("click",function(event){
+          console.log(event.target.innerHTML);
+          if (event.target.innerHTML==="Rosh Hashanah") {
+            var answerToFirst = document.createElement("p");
+            answerToFirst.textContent = "Correct!"; 
+            firstQuestion.appendChild(answerToFirst);
+            answerToFirst.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+            var goTo2ndQ = setTimeout(function(){
+            firstQuestion.setAttribute("style", "display: none");
+            secondQuestion.setAttribute("style", "display: inline");
+            },1000)
+        
+          }
+          else{
+            var answerToFirst = document.createElement("p");
+            answerToFirst.textContent = "Wrong!"; 
+            firstQuestion.appendChild(answerToFirst);
+            answerToFirst.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+            if (secondsLeft<10) {
+                secondsLeft=1;
+            }else{
+                secondsLeft=secondsLeft-9;
+            }
+          
+            var goTo2ndQ = setTimeout(function(){
+            firstQuestion.setAttribute("style", "display: none");
+            secondQuestion.setAttribute("style", "display: inline");
+            },1000)
+          }
+
+      })
+
+        //second question
+      secondQuestion.addEventListener("click",function(event){
+        console.log(event.target.innerHTML);
+        if (event.target.innerHTML==="Red") {
+          var answerToSecond = document.createElement("p");
+          answerToSecond.textContent = "Correct!"; 
+          secondQuestion.appendChild(answerToSecond);
+          answerToSecond.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+          var goTo3ndQ = setTimeout(function(){
+          secondQuestion.setAttribute("style", "display: none");
+          thirdQuestion.setAttribute("style", "display: inline");
+          },1000)
+      
+        }
+        else{
+          var answerToSecond = document.createElement("p");
+          answerToSecond.textContent = "Wrong!"; 
+          secondQuestion.appendChild(answerToSecond);
+          answerToSecond.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+          if (secondsLeft<10) {
+            secondsLeft=1;
+        }else{
+            secondsLeft=secondsLeft-9;
+        }
+
+          var goTo3ndQ = setTimeout(function(){
+          secondQuestion.setAttribute("style", "display: none");
+          thirdQuestion.setAttribute("style", "display: inline");
+          },1000)
+              
+        }
+
+    })
+
+      //third question
+      thirdQuestion.addEventListener("click",function(event){
+        console.log(event.target.innerHTML);
+        if (event.target.innerHTML==="A box of chocolates") {
+          var answerToThird = document.createElement("p");
+          answerToThird.textContent = "Correct!"; 
+          thirdQuestion.appendChild(answerToThird);
+          answerToThird.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+          var goToResult = setTimeout(function(){
+          thirdQuestion.setAttribute("style", "display: none");
+          resultsPage.setAttribute("style", "display: inline");
+          resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+          },1000)
+          console.log(goToResult);
+      
+        }
+        else{
+          var answerToThird = document.createElement("p");
+          answerToThird.textContent = "Wrong!"; 
+          thirdQuestion.appendChild(answerToThird);
+          answerToThird.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+
+          if (secondsLeft<10) {
+            secondsLeft=1;
+        }else{
+            secondsLeft=secondsLeft-9;
+        }
+      
+          var goToResult = setTimeout(function(){
+              thirdQuestion.setAttribute("style", "display: none");
+              resultsPage.setAttribute("style", "display: inline");
+              resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+              },1000)
+        }
+
+    })
+    
+
+    console.log(secondsLeft);
+
+   
+
+  
