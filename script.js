@@ -69,7 +69,7 @@ q3a3.textContent = "A lollipop";
 q3a4.textContent = "A box of chocolates";//answer
 // Set the text for the results page
 finishMessage.textContent = "Thanks for completing the quiz!"
-score.textContent = "Your score is: ";
+// score.textContent = "Your score is: ";
 submitButton.textContent = "Submit";
 // Set the text content for highscore page
 highscores.textContent = "Highscores"
@@ -153,11 +153,14 @@ q3a3.setAttribute("style", " color:white; background: #888888; padding: 5px; mar
 q3a4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");
 // Style results page
 resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+score.setAttribute("id", "score");
+listScores.setAttribute("id", "scoreList");
+listAnswers1.setAttribute("id", "Answers");
+listAnswers2.setAttribute("id", "Answers");
+listAnswers3.setAttribute("id", "Answers");
 // Style highscores page
 highscoresPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
 goBackButton.setAttribute("style", "margin:10px ");
-
-
 
 // // Display turn on and off
 // quizStartPage.setAttribute("style", "display: none");
@@ -168,18 +171,33 @@ thirdQuestion.setAttribute("style", "display: none");
 resultsPage.setAttribute("style", "display: none");
 highscoresPage.setAttribute("style", "display: none");
 
+
 //timer function
 var time = document.getElementById("Time");
+var scoreTime = document.getElementById("score")
 console.log(time);
-var secondsLeft = 60;
+var secondsLeft = 61;
 
 function setTime() {
     var timerInterval = setInterval(function() {
       secondsLeft--;
       time.textContent = "Time: " + secondsLeft;
-  
+      scoreTime.textContent = "Your score is: "+secondsLeft;
+
       if(secondsLeft <= 0) {
         clearInterval(timerInterval);
+        secondsLeft=61;
+        resultsPage.setAttribute("style", "display: inline");
+        resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+        secondQuestion.setAttribute("style", "display: none");
+        firstQuestion.setAttribute("style", "display: none");
+        thirdQuestion.setAttribute("style", "display: none");
+      }
+      else{
+        thirdQuestion.addEventListener("click",function(event){
+            clearInterval(timerInterval);
+            secondsLeft=61;
+        })
       }
     }, 1000);
   }
@@ -275,7 +293,6 @@ function setTime() {
           resultsPage.setAttribute("style", "display: inline");
           resultsPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
           },1000)
-          console.log(goToResult);
       
         }
         else{
@@ -298,9 +315,88 @@ function setTime() {
         }
 
     })
-    
 
-    console.log(secondsLeft);
+    //add scores to the list and to local storage
+
+var scoresList = [];
+
+init();
+
+function renderScores() {
+    listScores.innerHTML = "";
+ 
+    for (var i = 0; i < scoresList.length; i++) {
+      var score = scoresList[i];
+  
+      var li = document.createElement("li");
+      li.textContent = score;
+      li.setAttribute("data-index", i);
+  
+      listScores.appendChild(li);
+    }
+  }
+
+function init() {
+    var storedScores = JSON.parse(localStorage.getItem("scoreList"));
+  
+    if (storedScores !== null) {
+      scoresList = storedScores;
+    }
+    renderScores();
+  }
+
+  function storeScores() {
+    localStorage.setItem("scoresList", JSON.stringify(scoresList));
+  }
+
+submitButton.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    resultsPage.setAttribute("style", "display: none");
+    highscoresPage.setAttribute("style", "display: inline");
+    highscoresPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+  
+    var scoreText = initial.value.trim();
+  
+    if (scoreText === "") {
+      return;
+    }
+  
+    scoresList.push(scoreText);
+    initial.value = "";
+  
+    storeScores();
+    renderScores();
+  });
+
+  //Clear highcores
+
+clearButton.addEventListener("click", function(){
+    localStorage.clear();
+    listScores.innerHTML = "";
+    var scoresList = [];
+});
+
+//Go back to the start
+goBackButton.addEventListener("click", function(){
+    highscoresPage.setAttribute("style", "display: none");
+    quizStartPage.setAttribute("style", "display: inline");
+    firstQuestion.removeChild(firstQuestion.lastElementChild);
+    secondQuestion.removeChild(secondQuestion.lastElementChild);
+    thirdQuestion.removeChild(thirdQuestion.lastElementChild);
+});
+
+//Go to highscores page
+highscoresTitle.addEventListener("click", function(){
+    highscoresPage.setAttribute("style", "display: inline");
+    highscoresPage.setAttribute("style", "margin:auto; width:50%; text-align:center; Impact,Charcoal,sans-serif");
+    quizStartPage.setAttribute("style", "display: none");
+    secondQuestion.setAttribute("style", "display: none");
+    firstQuestion.setAttribute("style", "display: none");
+    thirdQuestion.setAttribute("style", "display: none");
+    resultsPage.setAttribute("style", "display: none");
+});
+    
 
    
 
